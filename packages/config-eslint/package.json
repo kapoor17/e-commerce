@@ -1,5 +1,5 @@
 {
-  "name": "@e_commerce_package/eslint-config",
+  "name": "@e_commerce_package/config-eslint",
   "version": "0.0.0",
   "private": true,
   "files": [
