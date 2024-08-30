@@ -19,5 +19,16 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kapoor17/e-commerce.git"
+  },
+  "keywords": ["e-commerce", "react.js", "turborepo", "express.js", "monorepo"],
+  "author": "Himanshu Kapoor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kapoor17/e-commerce/issues"
+  },
+  "homepage": "https://github.com/kapoor17/e-commerce#readme"
 }
