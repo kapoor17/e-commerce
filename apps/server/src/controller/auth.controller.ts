@@ -26,7 +26,8 @@ export const handleSignIn = async (
   try {
     if (req.isAuthenticated()) {
       const { user } = req;
-      return res.json({ user });
+      const { password, ...userWithoutPassword } = user;
+      return res.json({ user: userWithoutPassword });
     }
     throw new UnauthenticatedError('Not logged in');
   } catch (err) {

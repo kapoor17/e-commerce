@@ -6,10 +6,7 @@ import {
   UnauthenticatedError
 } from '@e_commerce_package/errors';
 
-export const authenticate = passport.authenticate('local', {
-  failureRedirect: '/login',
-  successRedirect: '/'
-});
+export const authenticate = passport.authenticate('local');
 
 export const isUnauthenticated = (
   req: Request,
