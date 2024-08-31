@@ -1,13 +1,15 @@
-import { varchar, pgTable } from 'drizzle-orm/pg-core';
+import { varchar, pgTable, integer } from 'drizzle-orm/pg-core';
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 import { BaseEntitySchema } from './base';
+import { uuid } from 'drizzle-orm/pg-core';
+import { CartSchema } from './carts';
 
 const { name, ...BaseEntitySchemaWithoutName } = BaseEntitySchema;
 
 export const UserSchema = pgTable('users', {
   ...BaseEntitySchemaWithoutName,
-  first_name: varchar('first_name', { length: 50 }).notNull(),
-  last_name: varchar('last_name', { length: 50 }).notNull(),
+  first_name: varchar('firstName', { length: 50 }).notNull(),
+  last_name: varchar('lastName', { length: 50 }).notNull(),
   email: varchar('email', { length: 256 }).notNull().unique(),
   password: varchar('password', { length: 128 }).notNull()
 });

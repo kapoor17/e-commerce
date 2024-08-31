@@ -1,12 +1,14 @@
-import { integer, numeric, pgTable } from 'drizzle-orm/pg-core';
+import { uuid, pgTable, decimal } from 'drizzle-orm/pg-core';
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 import { BaseEntitySchema } from './base';
 import { UserSchema } from './users';
 
 export const OrderSchema = pgTable('orders', {
   ...BaseEntitySchema,
-  userId: integer("user_id").notNull().references(() => UserSchema.id),
-  totalAmount: numeric("total_amount", { precision: 10, scale: 2 }).notNull(),
+  userId: uuid('userId')
+    .notNull()
+    .references(() => UserSchema.id),
+  totalAmount: decimal('totalAmount').notNull()
 });
 
 export type OrderInsert = typeof OrderSchema.$inferInsert;

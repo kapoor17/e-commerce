@@ -1,19 +1,13 @@
 import { pgEnum, boolean, uuid, varchar, timestamp } from 'drizzle-orm/pg-core';
 
-export const EntityStatus = pgEnum('status', [
-  'deleted',
-  'approved',
-  'active',
-  'inactive'
-]);
+export const EntityStatus = pgEnum('status', ['deleted', 'active', 'inactive']);
 
 export const EntityTimestamps = {
   createdAt: timestamp('createdAt').notNull().defaultNow(),
   updatedAt: timestamp('updatedAt')
     .defaultNow()
     .$onUpdate(() => new Date()),
-  deletedAt: timestamp('deletedAt'),
-  approvedAt: timestamp('approvedAt')
+  deletedAt: timestamp('deletedAt')
 };
 
 export const BaseEntitySchema = {

@@ -1,5 +1,5 @@
 {
-  "extends": "@e_commerce_package/config-typescript/express.json",
+  "extends": "@e_commerce_package/config-typescript/base.json",
   "include": ["src"],
   "compilerOptions": {
     "outDir": "dist"
