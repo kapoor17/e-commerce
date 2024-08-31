@@ -4,8 +4,8 @@ import { BaseEntitySchema } from './base';
 
 export const ProductSchema = pgTable('products', {
   ...BaseEntitySchema,
-  description: text('description'),
-  price: decimal('price', { precision: 10, scale: 2 }).notNull(),
+  description: text('description').notNull(),
+  price: decimal('price').notNull(),
   inventory: integer('inventory').notNull().default(0)
 });
 

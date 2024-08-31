@@ -1,5 +1,5 @@
 {
-  "name": "@e_commerce_package/dashboard-schemas",
+  "name": "@e_commerce_package/models",
   "version": "1.0.0",
   "description": "",
   "exports": {
