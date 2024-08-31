@@ -5,12 +5,14 @@
   "type": "commonjs",
   "scripts": {
     "build": "tsc",
-    "start:dev": "cross-env NODE_ENV=development node dist/src/index.js",
-    "start:staging": "cross-env NODE_ENV=staging node dist/src/index.js",
-    "start:production": "cross-env NODE_ENV=production node dist/src/index.js",
+    "start": "node dist/src/index.js",
+    "dev": "nodemon src/index.ts",
     "test": "jest",
-    "dev": "cross-env NODE_ENV=development nodemon src/index.ts",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --fix --max-warnings 0"
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --fix --max-warnings 0",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "cross-env DB_MIGRATING=true drizzle-kit migrate",
+    "db:drop": "drizzle-kit drop",
+    "db:studio": "drizzle-kit studio"
   },
   "devDependencies": {
     "@e_commerce_package/config-eslint": "*",
