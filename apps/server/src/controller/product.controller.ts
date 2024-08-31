@@ -17,12 +17,14 @@ export const createOne = async (
 };
 
 export const readAll = async (
-  req: Request,
+  req: Request<Object, Partial<ProductInsert>>,
   res: Response<{ products: ProductSelect[] }>,
   next: NextFunction
 ) => {
   try {
-    const products = await ProductService.findMany();
+    const products = await ProductService.findMany({
+      ...req.query
+    });
 
     return res.json({
       products
@@ -33,12 +35,13 @@ export const readAll = async (
 };
 
 export const readOne = async (
-  req: Request<Pick<ProductSelect, 'id'>>,
+  req: Request<Pick<ProductSelect, 'id'>, Partial<ProductInsert>>,
   res: Response<{ product: ProductSelect }>,
   next: NextFunction
 ) => {
   try {
     const product = await ProductService.findOne({
+      ...req.query,
       id: req.params.id
     });
 

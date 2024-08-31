@@ -24,13 +24,36 @@ productRouter.post(
   createOne
 );
 
-productRouter.get('/read', readAll);
+productRouter.get(
+  '/read',
+  validateSchema({
+    query: ProductInsertSchema.extend({
+      name: ProductInsertSchema.shape.name.optional(),
+      price: ProductInsertSchema.shape.price.optional(),
+      inventory: ProductInsertSchema.shape.inventory.optional()
+    }).pick({
+      name: true,
+      price: true,
+      inventory: true
+    })
+  }),
+  readAll
+);
 
 productRouter.get(
   '/read/:id',
   validateSchema({
     params: ProductInsertSchema.pick({
       id: true
+    }),
+    query: ProductInsertSchema.extend({
+      name: ProductInsertSchema.shape.name.optional(),
+      price: ProductInsertSchema.shape.price.optional(),
+      inventory: ProductInsertSchema.shape.inventory.optional()
+    }).pick({
+      name: true,
+      price: true,
+      inventory: true
     })
   }),
   readOne
