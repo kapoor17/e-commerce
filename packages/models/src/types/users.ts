@@ -1,5 +1,11 @@
-import { UserSelect } from '../schemas/users';
+import { UserSelect, UserInsert } from '../schemas/users';
 
+export type RegisterUser = Pick<
+  UserInsert,
+  'email' | 'password' | 'first_name' | 'last_name'
+>;
+
+export type LoginUser = Pick<UserSelect, 'email' | 'password'>;
 export type SafeUserSelect = Omit<UserSelect, 'password'>;
 
 export {
