@@ -1,9 +1,9 @@
-import { BaseServiceNew } from '@e_commerce_package/base-service';
+import { BaseService } from '@e_commerce_package/base-service';
 import { CartSchema } from '../schemas';
 import * as schemas from '../schemas';
 import { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 
-export class ApiKeyService extends BaseServiceNew<
+export class CartService extends BaseService<
   typeof schemas,
   typeof CartSchema
 > {

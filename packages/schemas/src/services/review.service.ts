@@ -1,9 +1,9 @@
-import { BaseServiceNew } from '@e_commerce_package/base-service';
+import { BaseService } from '@e_commerce_package/base-service';
 import { ReviewSchema } from '../schemas';
 import { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import * as schemas from '../schemas';
 
-export class RoleService extends BaseServiceNew<
+export class ReviewService extends BaseService<
   typeof schemas,
   typeof ReviewSchema
 > {

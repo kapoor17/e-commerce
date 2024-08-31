@@ -10,7 +10,7 @@ import { PgTableWithColumns } from 'drizzle-orm/pg-core';
 import { RelationalQueryBuilder } from 'drizzle-orm/pg-core/query-builders/query';
 import { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 
-export class BaseServiceNew<
+export class BaseService<
   H extends Record<string, unknown>,
   T extends PgTableWithColumns<{
     name: string;
