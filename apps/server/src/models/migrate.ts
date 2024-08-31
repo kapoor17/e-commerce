@@ -1,6 +1,6 @@
 import { migrate } from 'drizzle-orm/postgres-js/migrator';
 import drizzleConfig from '../../drizzle.config';
-import { db, connection } from './index';
+import { client, connection } from './index';
 import config from '../config';
 
 if (!config.DB_MIGRATING) {
@@ -10,7 +10,7 @@ if (!config.DB_MIGRATING) {
 }
 
 const main = async () => {
-  await migrate(db, {
+  await migrate(client, {
     migrationsFolder: drizzleConfig.out!
   });
 
