@@ -12,13 +12,13 @@ import reviewRouter from '../routes/review.route';
 const routesLoader = (app: Express) => {
   app.use('/api/v1/auth', authRouter);
   app.use(isAuthenticated);
-  app.use('/api/v1/user', userRouter);
-  app.use('/api/v1/product', productRouter);
-  app.use('/api/v1/order', orderRouter);
-  app.use('/api/v1/orderItem', orderItemRouter);
-  app.use('/api/v1/cart', cartRouter);
-  app.use('/api/v1/cartItem', cartItemRouter);
-  app.use('/api/v1/review', reviewRouter);
+  app.use('/api/v1/users', userRouter);
+  app.use('/api/v1/products', productRouter);
+  app.use('/api/v1/orders', orderRouter);
+  app.use('/api/v1/orderItems', orderItemRouter);
+  app.use('/api/v1/carts', cartRouter);
+  app.use('/api/v1/cartItems', cartItemRouter);
+  app.use('/api/v1/reviews', reviewRouter);
 };
 
 export default routesLoader;
