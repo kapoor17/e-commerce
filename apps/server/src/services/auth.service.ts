@@ -9,13 +9,11 @@ import UserService from './user.service';
 import bcrypt from 'bcrypt';
 
 class AuthService {
-  public static async signUp(data: {
-    user: UserInsert;
-  }): Promise<{ user: SafeUserSelect }> {
-    const { user: userData } = data;
-
+  public static async signUp(
+    data: UserInsert
+  ): Promise<{ user: SafeUserSelect }> {
     const existingUser = await UserService.findOne({
-      email: userData.email
+      email: data.email
     }).catch((e) => {
       if (e instanceof ReadError) return null;
       throw e;
@@ -25,7 +23,7 @@ class AuthService {
       throw new BadRequestError('User Already Exists');
     }
 
-    const { password, ...user } = await UserService.createOne(userData);
+    const { password, ...user } = await UserService.createOne(data);
 
     return { user };
   }

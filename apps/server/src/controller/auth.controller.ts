@@ -4,7 +4,7 @@ import { SafeUserSelect, UserInsert } from '@e_commerce_package/models/types';
 import { UnauthenticatedError } from '@e_commerce_package/errors';
 
 export const handleSignUp = async (
-  req: Request<object, object, { user: UserInsert }>,
+  req: Request<object, object, UserInsert>,
   res: Response<{ user: SafeUserSelect }>,
   next: NextFunction
 ) => {

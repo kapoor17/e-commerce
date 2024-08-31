@@ -23,15 +23,13 @@ authRouter.post(
 authRouter.post(
   '/sign-up',
   validateSchema({
-    body: z.object({
-      user: UserInsertSchema.extend({
-        password: UserInsertSchema.shape.password.min(8)
-      }).pick({
-        first_name: true,
-        last_name: true,
-        email: true,
-        password: true
-      })
+    body: UserInsertSchema.extend({
+      password: UserInsertSchema.shape.password.min(8)
+    }).pick({
+      first_name: true,
+      last_name: true,
+      email: true,
+      password: true
     })
   }),
   handleSignUp
