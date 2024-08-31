@@ -1,4 +1,3 @@
-import { randomBytes } from 'crypto';
 import { BadRequestError, ReadError } from '@e_commerce_package/errors';
 import {
   SafeUserSelect,
@@ -6,7 +5,7 @@ import {
   UserSelect
 } from '@e_commerce_package/models/types';
 import UserService from './user.service';
-import bcrypt from 'bcrypt';
+import { UserService as BaseUserService } from '@e_commerce_package/models/services';
 
 class AuthService {
   public static async signUp(
@@ -36,7 +35,7 @@ class AuthService {
       email
     });
 
-    await this.comparePassword(password, user.password);
+    await BaseUserService.comparePassword(password, user.password);
 
     return user;
   }
@@ -52,23 +51,6 @@ class AuthService {
     });
 
     return user;
-  }
-
-  static async generateTempPassword(length: number): Promise<string> {
-    return randomBytes(length).toString('hex').slice(0, length);
-  }
-
-  static async hashPassword(password: string): Promise<string> {
-    const salt = await bcrypt.genSalt(10);
-    const passwordHash = await bcrypt.hash(password, salt);
-    return passwordHash;
-  }
-
-  static async comparePassword(password: string, hash: string): Promise<void> {
-    const doesPasswordMatch = await bcrypt.compare(password, hash);
-    if (!doesPasswordMatch) {
-      throw new BadRequestError('Wrong Password');
-    }
   }
 }
 
