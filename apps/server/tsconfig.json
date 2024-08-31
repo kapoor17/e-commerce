@@ -1,0 +1,7 @@
+{
+  "extends": "@e_commerce_package/config-typescript/express.json",
+  "compilerOptions": {
+    "outDir": "dist"
+  },
+  "include": ["./*.js", "src/**/*.ts", "test/**/*.ts"]
+}
