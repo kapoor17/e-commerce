@@ -1,6 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
 import CartService from '../services/cart.service';
-import { CartSelect, CartInsert } from '@e_commerce_package/models/types';
+import {
+  CartSelect,
+  CartInsert,
+  CartWithCartItems
+} from '@e_commerce_package/models/types';
 
 export const createOne = async (
   req: Request<object, object, CartInsert>,
@@ -34,7 +38,7 @@ export const readAll = async (
 
 export const readOne = async (
   req: Request<Pick<CartSelect, 'id'>>,
-  res: Response<{ cart: CartSelect }>,
+  res: Response<{ cart: CartWithCartItems }>,
   next: NextFunction
 ) => {
   try {
