@@ -36,6 +36,13 @@
       "when": 1725220580880,
       "tag": "0004_soft_swordsman",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1725223473583,
+      "tag": "0005_absurd_loa",
+      "breakpoints": true
     }
   ]
 }
