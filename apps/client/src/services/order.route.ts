@@ -1,6 +1,10 @@
 import { AxiosPromise } from 'axios';
 import createAxiosInstance from './client';
-import { OrderInsert, OrderSelect } from '@e_commerce_package/models/types';
+import {
+  DetailedOrder,
+  OrderInsert,
+  OrderSelect
+} from '@e_commerce_package/models/types';
 
 const orderAxios = createAxiosInstance({
   baseURL: '/v1/orders',
@@ -9,14 +13,14 @@ const orderAxios = createAxiosInstance({
 
 const services = {
   getAll: async (): AxiosPromise<{
-    orders: OrderSelect[];
+    orders: DetailedOrder[];
   }> => {
     return orderAxios.get('/read');
   },
   getOne: async (
     id: OrderSelect['id']
   ): AxiosPromise<{
-    order: OrderSelect;
+    order: DetailedOrder;
   }> => {
     return orderAxios.get(`/read/${id}`);
   },

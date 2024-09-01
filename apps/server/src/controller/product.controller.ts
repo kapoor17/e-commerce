@@ -1,6 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
 import ProductService from '../services/product.service';
-import { ProductSelect, ProductInsert } from '@e_commerce_package/models/types';
+import {
+  ProductSelect,
+  ProductInsert,
+  ProductWithReview
+} from '@e_commerce_package/models/types';
 
 export const createOne = async (
   req: Request<object, object, ProductInsert>,
@@ -36,7 +40,7 @@ export const readAll = async (
 
 export const readOne = async (
   req: Request<Pick<ProductSelect, 'id'>, Partial<ProductInsert>>,
-  res: Response<{ product: ProductSelect }>,
+  res: Response<{ product: ProductWithReview }>,
   next: NextFunction
 ) => {
   try {

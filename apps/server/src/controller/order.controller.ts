@@ -1,6 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
 import OrderService from '../services/order.service';
-import { OrderSelect, OrderInsert } from '@e_commerce_package/models/types';
+import {
+  OrderSelect,
+  OrderInsert,
+  DetailedOrder
+} from '@e_commerce_package/models/types';
 
 export const createOne = async (
   req: Request<object, object, OrderInsert>,
@@ -18,7 +22,7 @@ export const createOne = async (
 
 export const readAll = async (
   req: Request,
-  res: Response<{ orders: OrderSelect[] }>,
+  res: Response<{ orders: DetailedOrder[] }>,
   next: NextFunction
 ) => {
   try {
@@ -34,7 +38,7 @@ export const readAll = async (
 
 export const readOne = async (
   req: Request<Pick<OrderSelect, 'id'>>,
-  res: Response<{ order: OrderSelect }>,
+  res: Response<{ order: DetailedOrder }>,
   next: NextFunction
 ) => {
   try {

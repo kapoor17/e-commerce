@@ -3,12 +3,12 @@ import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 import { BaseEntitySchema } from './base';
 import { UserSchema } from './users';
 
+const { name, ...BaseEntitySchemaWithoutName } = BaseEntitySchema;
 export const OrderSchema = pgTable('orders', {
-  ...BaseEntitySchema,
+  ...BaseEntitySchemaWithoutName,
   userId: uuid('userId')
     .notNull()
-    .references(() => UserSchema.id),
-  totalAmount: decimal('totalAmount').notNull()
+    .references(() => UserSchema.id)
 });
 
 export type OrderInsert = typeof OrderSchema.$inferInsert;

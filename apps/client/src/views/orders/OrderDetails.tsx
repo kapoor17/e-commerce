@@ -1,23 +1,40 @@
 import { Copy, CreditCard, Truck } from 'lucide-react';
 
 import {
-  Button,
   Card,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle,
-  Separator
-} from '@/components/ui';
+  CardTitle
+} from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
+import { Button } from '@/components/ui/button';
+import { DetailedOrder } from '@e_commerce_package/models/types';
+import moment from 'moment';
+import { useMemo } from 'react';
 
-export default function Component() {
+interface IOrderDetails {
+  order: DetailedOrder;
+}
+
+const OrderDetails: React.FC<IOrderDetails> = ({
+  order: { id, createdAt, orderItems }
+}) => {
+  const totalOrderValue = useMemo(
+    () =>
+      orderItems.reduce(
+        (sum, orderItem) => sum + Number(orderItem.price) * orderItem.quantity,
+        0
+      ),
+    [orderItems]
+  );
   return (
     <Card className='overflow-hidden'>
       <CardHeader className='flex flex-row items-start bg-muted/50'>
         <div className='grid gap-0.5'>
           <CardTitle className='group flex items-center gap-2 text-lg'>
-            Order Oe31b70H
+            Order {id.substring(0, 8)}
             <Button
               size='icon'
               variant='outline'
@@ -27,7 +44,9 @@ export default function Component() {
               <span className='sr-only'>Copy Order ID</span>
             </Button>
           </CardTitle>
-          <CardDescription>Date: November 23, 2023</CardDescription>
+          <CardDescription>
+            Date: {moment(createdAt).format('MMMM D, YYYY')}
+          </CardDescription>
         </div>
         <div className='ml-auto flex items-center gap-1'>
           <Button size='sm' variant='outline' className='h-8 gap-1'>
@@ -42,36 +61,20 @@ export default function Component() {
         <div className='grid gap-3'>
           <div className='font-semibold'>Order Details</div>
           <ul className='grid gap-3'>
-            <li className='flex items-center justify-between'>
-              <span className='text-muted-foreground'>
-                Glimmer Lamps x <span>2</span>
-              </span>
-              <span>$250.00</span>
-            </li>
-            <li className='flex items-center justify-between'>
-              <span className='text-muted-foreground'>
-                Aqua Filters x <span>1</span>
-              </span>
-              <span>$49.00</span>
-            </li>
+            {orderItems.map((orderItem) => (
+              <li className='flex items-center justify-between'>
+                <span className='text-muted-foreground'>
+                  {orderItem.product.name} x <span>{orderItem.quantity}</span>
+                </span>
+                <span>${orderItem.price}</span>
+              </li>
+            ))}
           </ul>
           <Separator className='my-2' />
           <ul className='grid gap-3'>
             <li className='flex items-center justify-between'>
               <span className='text-muted-foreground'>Subtotal</span>
-              <span>$299.00</span>
-            </li>
-            <li className='flex items-center justify-between'>
-              <span className='text-muted-foreground'>Shipping</span>
-              <span>$5.00</span>
-            </li>
-            <li className='flex items-center justify-between'>
-              <span className='text-muted-foreground'>Tax</span>
-              <span>$25.00</span>
-            </li>
-            <li className='flex items-center justify-between font-semibold'>
-              <span className='text-muted-foreground'>Total</span>
-              <span>$329.00</span>
+              <span>${totalOrderValue}</span>
             </li>
           </ul>
         </div>
@@ -94,28 +97,6 @@ export default function Component() {
         </div>
         <Separator className='my-4' />
         <div className='grid gap-3'>
-          <div className='font-semibold'>Customer Information</div>
-          <dl className='grid gap-3'>
-            <div className='flex items-center justify-between'>
-              <dt className='text-muted-foreground'>Customer</dt>
-              <dd>Liam Johnson</dd>
-            </div>
-            <div className='flex items-center justify-between'>
-              <dt className='text-muted-foreground'>Email</dt>
-              <dd>
-                <a href='mailto:'>liam@acme.com</a>
-              </dd>
-            </div>
-            <div className='flex items-center justify-between'>
-              <dt className='text-muted-foreground'>Phone</dt>
-              <dd>
-                <a href='tel:'>+1 234 567 890</a>
-              </dd>
-            </div>
-          </dl>
-        </div>
-        <Separator className='my-4' />
-        <div className='grid gap-3'>
           <div className='font-semibold'>Payment Information</div>
           <dl className='grid gap-3'>
             <div className='flex items-center justify-between'>
@@ -135,4 +116,6 @@ export default function Component() {
       </CardFooter>
     </Card>
   );
-}
+};
+
+export default OrderDetails;

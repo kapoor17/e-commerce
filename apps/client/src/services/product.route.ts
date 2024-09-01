@@ -1,6 +1,10 @@
 import { AxiosPromise } from 'axios';
 import createAxiosInstance from './client';
-import { ProductInsert, ProductSelect } from '@e_commerce_package/models/types';
+import {
+  ProductInsert,
+  ProductSelect,
+  ProductWithReview
+} from '@e_commerce_package/models/types';
 
 const productAxios = createAxiosInstance({
   baseURL: '/v1/products',
@@ -16,7 +20,7 @@ const services = {
   getOne: async (
     id: ProductSelect['id']
   ): AxiosPromise<{
-    product: ProductSelect;
+    product: ProductWithReview;
   }> => {
     return productAxios.get(`/read/${id}`);
   },

@@ -6,6 +6,7 @@ import {
 } from '@e_commerce_package/models/types';
 import UserService from './user.service';
 import { UserService as BaseUserService } from '@e_commerce_package/models/services';
+import CartService from './cart.service';
 
 class AuthService {
   public static async signUp(
@@ -23,6 +24,7 @@ class AuthService {
     }
 
     const { password, ...user } = await UserService.createOne(data);
+    await CartService.createOne({ userId: user.id });
 
     return { user };
   }
