@@ -10,6 +10,7 @@ import { PrivateRoutes, PublicRoutes } from './components/utility/routes';
 import { DashboardLayout } from './components/composite/DashboardLayout';
 import Catalog from './views/products/Catalog';
 import Product from './views/products/Product';
+import Cart from './views/cart/Cart';
 
 const App = () => {
   const router = createBrowserRouter(
@@ -24,6 +25,7 @@ const App = () => {
           <Route element={<DashboardLayout />}>
             <Route path='products' element={<Catalog />} />
             <Route path='products/:productId' element={<Product />} />
+            <Route path='cart' element={<Cart />} />
           </Route>
         </Route>
       </Route>

@@ -17,7 +17,7 @@ import { useAuth } from '@/providers/AuthProvider';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import Review from '../reviews/Review';
 import { StarFilledIcon, StarIcon } from '@radix-ui/react-icons';
-import { If, Then, Else } from '@/components/utility/conditionals';
+import { If, Then, Else, When } from '@/components/utility/conditionals';
 
 export default function Product() {
   const { user } = useAuth();
@@ -135,21 +135,23 @@ export default function Product() {
           </div>
         </div>
       </div>
-      <Card>
-        <CardHeader>
-          <CardTitle>Reviews</CardTitle>
-        </CardHeader>
-        <CardContent className='grid gap-8'>
-          {product.reviews.map((review) => (
-            <Review
-              key={review.id}
-              user={review.user}
-              rating={review.rating}
-              comment={review.comment}
-            />
-          ))}
-        </CardContent>
-      </Card>
+      <When condition={!!product.reviews.length}>
+        <Card>
+          <CardHeader>
+            <CardTitle>Reviews</CardTitle>
+          </CardHeader>
+          <CardContent className='grid gap-8'>
+            {product.reviews.map((review) => (
+              <Review
+                key={review.id}
+                user={review.user}
+                rating={review.rating}
+                comment={review.comment}
+              />
+            ))}
+          </CardContent>
+        </Card>
+      </When>
     </Skeleton>
   );
 }
