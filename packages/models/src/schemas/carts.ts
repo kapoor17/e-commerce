@@ -3,9 +3,12 @@ import { BaseEntitySchema } from './base';
 import { createInsertSchema } from 'drizzle-zod';
 import { UserSchema } from './users';
 
+const { name, ...BaseEntitySchemaWithoutName } = BaseEntitySchema;
 export const CartSchema = pgTable('carts', {
-  ...BaseEntitySchema,
-  userId: uuid('userId').references(() => UserSchema.id)
+  ...BaseEntitySchemaWithoutName,
+  userId: uuid('userId')
+    .references(() => UserSchema.id)
+    .unique()
 });
 
 export type CartInsert = typeof CartSchema.$inferInsert;

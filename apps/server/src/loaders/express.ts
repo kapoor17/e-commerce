@@ -11,14 +11,20 @@ import passportLoader from './passport';
 const expressLoader = (): Express => {
   const app = express();
 
-  const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000,
-    limit: 100,
-    message: 'Too many requests from this IP, please try again after 15 minutes'
-  });
-
-  app.use(limiter);
-  app.use(cors());
+  app.use(
+    rateLimit({
+      windowMs: 15 * 60 * 1000,
+      limit: 100,
+      message:
+        'Too many requests from this IP, please try again after 15 minutes'
+    })
+  );
+  app.use(
+    cors({
+      origin: 'http://localhost:5173',
+      credentials: true
+    })
+  );
   app.use(morgan('dev'));
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));

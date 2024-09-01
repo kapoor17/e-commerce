@@ -6,11 +6,11 @@ import LocalStrategy, {
 } from 'passport-local';
 import UserService from '../services/user.service';
 import AuthService from '../services/auth.service';
-import { UserSelect } from '@e_commerce_package/models/types';
+import { DetailedUserSelect } from '@e_commerce_package/models/types';
 
 declare global {
   namespace Express {
-    interface User extends UserSelect {}
+    interface User extends DetailedUserSelect {}
   }
 }
 
