@@ -28,7 +28,7 @@ export const PublicRoutes: React.FC = () => {
   return (
     <If condition={isAuthenticated}>
       <Then>
-        <Navigate to='/dashboard' />
+        <Navigate to='/products' />
       </Then>
       <Else>
         <Outlet />

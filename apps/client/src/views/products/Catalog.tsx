@@ -113,9 +113,8 @@ const Catalog: React.FC = () => {
                   {allProducts.map((product) => {
                     return (
                       <TableRow
-                        onClick={() =>
-                          navigate(`/dashboard/products/${product.id}`)
-                        }
+                        className='cursor-pointer'
+                        onClick={() => navigate(`/products/${product.id}`)}
                       >
                         <TableCell className='hidden sm:table-cell'>
                           <img

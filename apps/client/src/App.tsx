@@ -16,13 +16,13 @@ const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements([
       <Route path='/'>
-        <Route index element={<Navigate to='/dashboard' />} />
+        <Route index element={<Navigate to='/products' />} />
         <Route element={<PublicRoutes />}>
           <Route path='sign-up' element={<SignupForm />} />
           <Route path='sign-in' element={<SigninForm />} />
         </Route>
         <Route element={<PrivateRoutes />}>
-          <Route path='dashboard' element={<DashboardLayout />}>
+          <Route element={<DashboardLayout />}>
             <Route path='products' element={<Catalog />} />
             <Route path='products/:productId' element={<Product />} />
           </Route>
