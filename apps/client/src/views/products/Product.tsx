@@ -1,12 +1,12 @@
-import { Label } from '@/components/ui';
+import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectTrigger,
   SelectValue,
   SelectContent,
   SelectItem
-} from '@/components/ui';
-import { Button } from '@/components/ui';
+} from '@/components/ui/select';
+import { Button } from '@/components/ui/button';
 
 export default function Component() {
   return (
