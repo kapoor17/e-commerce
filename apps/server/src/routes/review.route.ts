@@ -15,7 +15,6 @@ reviewRouter.post(
   '/create',
   validateSchema({
     body: ReviewInsertSchema.pick({
-      name: true,
       userId: true,
       productId: true,
       rating: true,
@@ -41,13 +40,11 @@ reviewRouter.patch(
   '/update/:id',
   validateSchema({
     body: ReviewInsertSchema.extend({
-      name: ReviewInsertSchema.shape.name.optional(),
       userId: ReviewInsertSchema.shape.userId.optional(),
       productId: ReviewInsertSchema.shape.productId.optional(),
       rating: ReviewInsertSchema.shape.rating.optional(),
       comment: ReviewInsertSchema.shape.comment.optional()
     }).pick({
-      name: true,
       userId: true,
       productId: true,
       rating: true,
