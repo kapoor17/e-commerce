@@ -5,6 +5,7 @@ import { OrderSchema } from './orders';
 import { OrderItemSchema } from './orderItems';
 import { ProductSchema } from './products';
 import { UserSchema } from './users';
+import { ReviewSchema } from './reviews';
 
 export const userRelations = relations(UserSchema, ({ one, many }) => ({
   cart: one(CartSchema),
@@ -51,5 +52,17 @@ export const orderItemRelations = relations(OrderItemSchema, ({ one }) => ({
 
 export const productRelations = relations(ProductSchema, ({ many }) => ({
   cartItems: many(CartItemSchema),
-  orderItems: many(OrderItemSchema)
+  orderItems: many(OrderItemSchema),
+  reviews: many(ReviewSchema)
+}));
+
+export const reviewRelations = relations(ReviewSchema, ({ one }) => ({
+  product: one(ProductSchema, {
+    fields: [ReviewSchema.productId],
+    references: [ProductSchema.id]
+  }),
+  user: one(UserSchema, {
+    fields: [ReviewSchema.userId],
+    references: [UserSchema.id]
+  })
 }));

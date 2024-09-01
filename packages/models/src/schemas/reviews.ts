@@ -4,8 +4,9 @@ import { ProductSchema } from './products';
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 import { BaseEntitySchema } from './base';
 
+const { name, ...BaseEntitySchemaWithoutName } = BaseEntitySchema;
 export const ReviewSchema = pgTable('reviews', {
-  ...BaseEntitySchema,
+  ...BaseEntitySchemaWithoutName,
   userId: uuid('userId').references(() => UserSchema.id),
   productId: uuid('productId').references(() => ProductSchema.id),
   rating: integer('rating').notNull(),
