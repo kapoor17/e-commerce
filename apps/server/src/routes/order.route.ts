@@ -15,9 +15,7 @@ orderRouter.post(
   '/create',
   validateSchema({
     body: OrderInsertSchema.pick({
-      name: true,
-      userId: true,
-      totalAmount: true
+      userId: true
     })
   }),
   createOne
@@ -39,13 +37,9 @@ orderRouter.patch(
   '/update/:id',
   validateSchema({
     body: OrderInsertSchema.extend({
-      name: OrderInsertSchema.shape.name.optional(),
-      userId: OrderInsertSchema.shape.userId.optional(),
-      totalAmount: OrderInsertSchema.shape.totalAmount.optional()
+      userId: OrderInsertSchema.shape.userId.optional()
     }).pick({
-      name: true,
-      userId: true,
-      totalAmount: true
+      userId: true
     }),
     params: OrderInsertSchema.pick({
       id: true
