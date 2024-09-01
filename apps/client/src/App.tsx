@@ -7,7 +7,6 @@ import {
 } from 'react-router-dom';
 import { SignupForm, SigninForm } from './views/auth';
 import { PrivateRoutes, PublicRoutes } from './components/utility/routes';
-
 import { DashboardLayout } from './components/composite/DashboardLayout';
 import Catalog from './views/products/Catalog';
 import Product from './views/products/Product';

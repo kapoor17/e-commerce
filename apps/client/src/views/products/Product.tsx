@@ -75,6 +75,14 @@ export default function Product() {
     return;
   }
 
+  const averageRating = calculateAverageRating(product.reviews);
+
+  function calculateAverageRating(reviews: { rating: number }[]): number {
+    if (reviews.length === 0) return 0;
+    const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+    return totalRating / reviews.length;
+  }
+
   return (
     <Skeleton isLoading={isFetching} isError={isError}>
       <div className='grid md:grid-cols-2 items-start max-w-3xl px-4 mx-auto py-6 gap-6 md:gap-12'>
@@ -87,11 +95,16 @@ export default function Product() {
               </div>
               <div className='flex items-center gap-4'>
                 <div className='flex items-center gap-0.5'>
-                  <StarIcon className='w-5 h-5 fill-primary' />
-                  <StarIcon className='w-5 h-5 fill-primary' />
-                  <StarIcon className='w-5 h-5 fill-primary' />
-                  <StarIcon className='w-5 h-5 fill-muted stroke-muted-foreground' />
-                  <StarIcon className='w-5 h-5 fill-muted stroke-muted-foreground' />
+                  {Array.from({ length: 5 }, (_, index) => (
+                    <StarIcon
+                      key={index}
+                      className={
+                        index < Math.floor(averageRating)
+                          ? 'w-5 h-5 fill-primary'
+                          : 'w-5 h-5 fill-muted stroke-muted-foreground'
+                      }
+                    />
+                  ))}
                 </div>
               </div>
             </div>
