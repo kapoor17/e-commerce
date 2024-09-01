@@ -27,7 +27,7 @@ const services = {
     return reviewAxios.get(`/read/${id}`);
   },
   createOne: async (
-    data: ReviewInsert
+    data: Omit<ReviewInsert, 'userId'>
   ): AxiosPromise<{
     review: ReviewSelect;
   }> => {

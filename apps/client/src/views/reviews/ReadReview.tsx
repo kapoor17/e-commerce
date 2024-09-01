@@ -11,7 +11,7 @@ interface IReviewProps {
   comment: string | null;
 }
 
-const Review: React.FC<IReviewProps> = ({ user, rating, comment }) => {
+const ReadReview: React.FC<IReviewProps> = ({ user, rating, comment }) => {
   return (
     <div className='flex items-center gap-4 w-full'>
       <Avatar className='hidden h-9 w-9 sm:flex'>
@@ -40,4 +40,4 @@ const Review: React.FC<IReviewProps> = ({ user, rating, comment }) => {
   );
 };
 
-export default Review;
+export default ReadReview;
