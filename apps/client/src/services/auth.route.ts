@@ -2,6 +2,7 @@ import { AxiosPromise } from 'axios';
 import createAxiosInstance from './client';
 import {
   LoginUser,
+  SafeDetailedUserSelect,
   SafeUserSelect,
   UserInsert
 } from '@e_commerce_package/models/types';
@@ -19,7 +20,7 @@ const services = {
     return authAxios.post(`/sign-in`, data);
   },
   status: (): AxiosPromise<{
-    user: SafeUserSelect | null;
+    user: SafeDetailedUserSelect | null;
     isAuthenticated: boolean;
   }> => {
     return authAxios.get(`/status`);

@@ -11,21 +11,21 @@ const services = {
   getAll: async (): AxiosPromise<{
     products: ProductSelect[];
   }> => {
-    return productAxios.get('/products/read');
+    return productAxios.get('/read');
   },
   getOne: async (
     id: ProductSelect['id']
   ): AxiosPromise<{
     product: ProductSelect;
   }> => {
-    return productAxios.get(`/products/read/${id}`);
+    return productAxios.get(`/read/${id}`);
   },
   createOne: async (
     data: ProductInsert
   ): AxiosPromise<{
     product: ProductSelect;
   }> => {
-    return productAxios.post(`/products/create/`, data);
+    return productAxios.post(`/create/`, data);
   },
   updateOne: async (
     id: ProductSelect['id'],
@@ -33,14 +33,14 @@ const services = {
   ): AxiosPromise<{
     product: ProductSelect;
   }> => {
-    return productAxios.patch(`/products/update/${id}`, data);
+    return productAxios.patch(`/update/${id}`, data);
   },
   deleteOne: async (
     id: ProductSelect['id']
   ): AxiosPromise<{
     product: ProductSelect;
   }> => {
-    return productAxios.delete(`/products/delete/${id}`);
+    return productAxios.delete(`/delete/${id}`);
   }
 };
 

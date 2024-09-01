@@ -1,11 +1,11 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import services from '@/services/auth.route';
-import { SafeUserSelect } from '@e_commerce_package/models/types';
+import { SafeDetailedUserSelect } from '@e_commerce_package/models/types';
 
 interface AuthProviderState {
   isAuthenticated: boolean;
-  user: SafeUserSelect | null;
+  user: SafeDetailedUserSelect | null;
   loading: boolean;
 }
 

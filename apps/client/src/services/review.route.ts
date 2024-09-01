@@ -11,21 +11,21 @@ const services = {
   getAll: async (): AxiosPromise<{
     reviews: ReviewSelect[];
   }> => {
-    return reviewAxios.get('/reviews/read');
+    return reviewAxios.get('/read');
   },
   getOne: async (
     id: ReviewSelect['id']
   ): AxiosPromise<{
     review: ReviewSelect;
   }> => {
-    return reviewAxios.get(`/reviews/read/${id}`);
+    return reviewAxios.get(`/read/${id}`);
   },
   createOne: async (
     data: ReviewInsert
   ): AxiosPromise<{
     review: ReviewSelect;
   }> => {
-    return reviewAxios.post(`/reviews/create/`, data);
+    return reviewAxios.post(`/create/`, data);
   },
   updateOne: async (
     id: ReviewSelect['id'],
@@ -33,14 +33,14 @@ const services = {
   ): AxiosPromise<{
     review: ReviewSelect;
   }> => {
-    return reviewAxios.patch(`/reviews/update/${id}`, data);
+    return reviewAxios.patch(`/update/${id}`, data);
   },
   deleteOne: async (
     id: ReviewSelect['id']
   ): AxiosPromise<{
     review: ReviewSelect;
   }> => {
-    return reviewAxios.delete(`/reviews/delete/${id}`);
+    return reviewAxios.delete(`/delete/${id}`);
   }
 };
 

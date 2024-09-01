@@ -11,21 +11,21 @@ const services = {
   getAll: async (): AxiosPromise<{
     orders: OrderSelect[];
   }> => {
-    return orderAxios.get('/orders/read');
+    return orderAxios.get('/read');
   },
   getOne: async (
     id: OrderSelect['id']
   ): AxiosPromise<{
     order: OrderSelect;
   }> => {
-    return orderAxios.get(`/orders/read/${id}`);
+    return orderAxios.get(`/read/${id}`);
   },
   createOne: async (
     data: OrderInsert
   ): AxiosPromise<{
     order: OrderSelect;
   }> => {
-    return orderAxios.post(`/orders/create/`, data);
+    return orderAxios.post(`/create/`, data);
   },
   updateOne: async (
     id: OrderSelect['id'],
@@ -33,14 +33,14 @@ const services = {
   ): AxiosPromise<{
     order: OrderSelect;
   }> => {
-    return orderAxios.patch(`/orders/update/${id}`, data);
+    return orderAxios.patch(`/update/${id}`, data);
   },
   deleteOne: async (
     id: OrderSelect['id']
   ): AxiosPromise<{
     order: OrderSelect;
   }> => {
-    return orderAxios.delete(`/orders/delete/${id}`);
+    return orderAxios.delete(`/delete/${id}`);
   }
 };
 

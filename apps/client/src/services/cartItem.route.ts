@@ -14,21 +14,21 @@ const services = {
   getAll: async (): AxiosPromise<{
     cartItems: CartItemSelect[];
   }> => {
-    return cartItemAxios.get('/cartItems/read');
+    return cartItemAxios.get('/read');
   },
   getOne: async (
     id: CartItemSelect['id']
   ): AxiosPromise<{
     cartItem: CartItemSelect;
   }> => {
-    return cartItemAxios.get(`/cartItems/read/${id}`);
+    return cartItemAxios.get(`/read/${id}`);
   },
   createOne: async (
     data: CartItemInsert
   ): AxiosPromise<{
     cartItem: CartItemSelect;
   }> => {
-    return cartItemAxios.post(`/cartItems/create/`, data);
+    return cartItemAxios.post(`/create/`, data);
   },
   updateOne: async (
     id: CartItemSelect['id'],
@@ -36,14 +36,14 @@ const services = {
   ): AxiosPromise<{
     cartItem: CartItemSelect;
   }> => {
-    return cartItemAxios.patch(`/cartItems/update/${id}`, data);
+    return cartItemAxios.patch(`/update/${id}`, data);
   },
   deleteOne: async (
     id: CartItemSelect['id']
   ): AxiosPromise<{
     cartItem: CartItemSelect;
   }> => {
-    return cartItemAxios.delete(`/cartItems/delete/${id}`);
+    return cartItemAxios.delete(`/delete/${id}`);
   }
 };
 

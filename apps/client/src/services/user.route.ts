@@ -11,21 +11,21 @@ const services = {
   getAll: async (): AxiosPromise<{
     users: UserSelect[];
   }> => {
-    return userAxios.get('/users/read');
+    return userAxios.get('/read');
   },
   getOne: async (
     id: UserSelect['id']
   ): AxiosPromise<{
     user: UserSelect;
   }> => {
-    return userAxios.get(`/users/read/${id}`);
+    return userAxios.get(`/read/${id}`);
   },
   createOne: async (
     data: UserInsert
   ): AxiosPromise<{
     user: UserSelect;
   }> => {
-    return userAxios.post(`/users/create/`, data);
+    return userAxios.post(`/create/`, data);
   },
   updateOne: async (
     id: UserSelect['id'],
@@ -33,14 +33,14 @@ const services = {
   ): AxiosPromise<{
     user: UserSelect;
   }> => {
-    return userAxios.patch(`/users/update/${id}`, data);
+    return userAxios.patch(`/update/${id}`, data);
   },
   deleteOne: async (
     id: UserSelect['id']
   ): AxiosPromise<{
     user: UserSelect;
   }> => {
-    return userAxios.delete(`/users/delete/${id}`);
+    return userAxios.delete(`/delete/${id}`);
   }
 };
 

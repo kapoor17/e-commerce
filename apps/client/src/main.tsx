@@ -20,7 +20,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <div className='flex flex-col h-screen w-screen'>
+        <div className='flex flex-col h-full w-full'>
           <App />
         </div>
         <Toaster />
