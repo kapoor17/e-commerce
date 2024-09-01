@@ -1,6 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
 import AuthService from '../services/auth.service';
-import { SafeUserSelect, UserInsert } from '@e_commerce_package/models/types';
+import {
+  SafeDetailedUserSelect,
+  SafeUserSelect,
+  UserInsert
+} from '@e_commerce_package/models/types';
 import { UnauthenticatedError } from '@e_commerce_package/errors';
 
 export const handleSignUp = async (
@@ -54,7 +58,7 @@ export const handleLogout = (
 export const handleStatusCheck = (
   req: Request,
   res: Response<{
-    user: SafeUserSelect | null;
+    user: SafeDetailedUserSelect | null;
     isAuthenticated: boolean;
   }>,
   next: NextFunction

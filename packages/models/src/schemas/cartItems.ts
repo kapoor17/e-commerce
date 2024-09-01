@@ -5,10 +5,15 @@ import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 import { uuid } from 'drizzle-orm/pg-core';
 import { BaseEntitySchema } from './base';
 
+const { name, ...BaseEntitySchemaWithoutName } = BaseEntitySchema;
 export const CartItemSchema = pgTable('cart_items', {
-  ...BaseEntitySchema,
-  cartId: uuid('cartId').references(() => CartSchema.id),
-  productId: uuid('productId').references(() => ProductSchema.id),
+  ...BaseEntitySchemaWithoutName,
+  cartId: uuid('cartId')
+    .references(() => CartSchema.id)
+    .notNull(),
+  productId: uuid('productId')
+    .references(() => ProductSchema.id)
+    .notNull(),
   quantity: integer('quantity').notNull()
 });
 

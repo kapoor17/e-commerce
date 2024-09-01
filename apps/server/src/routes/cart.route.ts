@@ -15,7 +15,6 @@ cartRouter.post(
   '/create',
   validateSchema({
     body: CartInsertSchema.pick({
-      name: true,
       userId: true
     })
   }),
@@ -38,10 +37,8 @@ cartRouter.patch(
   '/update/:id',
   validateSchema({
     body: CartInsertSchema.extend({
-      name: CartInsertSchema.shape.name.optional(),
       userId: CartInsertSchema.shape.userId.optional()
     }).pick({
-      name: true,
       userId: true
     }),
     params: CartInsertSchema.pick({

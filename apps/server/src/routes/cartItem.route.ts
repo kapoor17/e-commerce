@@ -15,7 +15,6 @@ cartItemRouter.post(
   '/create',
   validateSchema({
     body: CartItemInsertSchema.pick({
-      name: true,
       cartId: true,
       productId: true,
       quantity: true
@@ -40,12 +39,10 @@ cartItemRouter.patch(
   '/update/:id',
   validateSchema({
     body: CartItemInsertSchema.extend({
-      name: CartItemInsertSchema.shape.name.optional(),
       cartId: CartItemInsertSchema.shape.cartId.optional(),
       productId: CartItemInsertSchema.shape.productId.optional(),
       quantity: CartItemInsertSchema.shape.quantity.optional()
     }).pick({
-      name: true,
       cartId: true,
       productId: true,
       quantity: true

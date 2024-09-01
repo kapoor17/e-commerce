@@ -1,8 +1,8 @@
 import { BadRequestError, ReadError } from '@e_commerce_package/errors';
 import {
+  DetailedUserSelect,
   SafeUserSelect,
-  UserInsert,
-  UserSelect
+  UserInsert
 } from '@e_commerce_package/models/types';
 import UserService from './user.service';
 import { UserService as BaseUserService } from '@e_commerce_package/models/services';
@@ -29,7 +29,7 @@ class AuthService {
 
   public static async signIn(
     data: Pick<UserInsert, 'email' | 'password'>
-  ): Promise<UserSelect> {
+  ): Promise<DetailedUserSelect> {
     const { email, password } = data;
     const user = await UserService.findOne({
       email
