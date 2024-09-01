@@ -57,6 +57,7 @@ const Cart: React.FC = () => {
     mutationFn: () => orderServices.createOne(),
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['orders', 'getAll'] });
+      queryClient.invalidateQueries({ queryKey: ['products', 'getAll'] });
     }
   });
 

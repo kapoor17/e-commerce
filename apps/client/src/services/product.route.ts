@@ -29,7 +29,7 @@ const services = {
   ): AxiosPromise<{
     product: ProductSelect;
   }> => {
-    return productAxios.post(`/create/`, data);
+    return productAxios.post(`/create`, data);
   }
 };
 

@@ -23,7 +23,7 @@ const services = {
   ): AxiosPromise<{
     orderItem: OrderItemSelect;
   }> => {
-    return orderItemAxios.post(`/create/`, data);
+    return orderItemAxios.post(`/create`, data);
   }
 };
 

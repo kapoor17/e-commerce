@@ -19,7 +19,7 @@ const services = {
   createOne: async (): AxiosPromise<{
     cart: CartSelect;
   }> => {
-    return cartAxios.post(`/create/`);
+    return cartAxios.post(`/create`);
   }
 };
 
