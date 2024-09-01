@@ -112,10 +112,7 @@ const Catalog: React.FC = () => {
                 <TableBody>
                   {allProducts.map((product) => {
                     return (
-                      <TableRow
-                        className='cursor-pointer'
-                        onClick={() => navigate(`/products/${product.id}`)}
-                      >
+                      <TableRow>
                         <TableCell className='hidden sm:table-cell'>
                           <img
                             alt='Product image'
@@ -125,7 +122,10 @@ const Catalog: React.FC = () => {
                             width='64'
                           />
                         </TableCell>
-                        <TableCell className='font-medium'>
+                        <TableCell
+                          className='font-medium cursor-pointer'
+                          onClick={() => navigate(`/products/${product.id}`)}
+                        >
                           {product.name}
                         </TableCell>
                         <TableCell>

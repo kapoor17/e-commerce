@@ -48,10 +48,8 @@ export default function Product() {
           cartId: user?.cart.id ?? ''
         }),
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['cartItems', 'getAll'] });
         queryClient.invalidateQueries({ queryKey: ['cart', 'getAll'] });
-      },
-      mutationKey: ['cartItem', 'createOne']
+      }
     });
 
   if (!product || !user) return null;

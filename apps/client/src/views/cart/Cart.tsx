@@ -27,15 +27,18 @@ import React from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import cartServices from '@/services/cart.route';
 import cartItemServices from '@/services/cartItem.route';
+import orderServices from '@/services/order.route';
+import orderItemServices from '@/services/orderItem.route';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useAuth } from '@/providers/AuthProvider';
 import { useNavigate } from 'react-router';
+import { OrderItemInsert } from '@e_commerce_package/models/types';
 
 const Cart: React.FC = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const {
-    data: allProducts = [],
+    data: allCartItems = [],
     isFetching,
     isError
   } = useQuery({
@@ -47,14 +50,52 @@ const Cart: React.FC = () => {
   const queryClient = useQueryClient();
   const { mutateAsync: deleteCartItem } = useMutation({
     mutationFn: (id: string) => cartItemServices.deleteOne(id),
-    onSuccess: () => {
+    onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['cart', 'getAll'] });
-    },
-    mutationKey: ['cartItem', 'deleteOne']
+    }
+  });
+
+  const { mutateAsync: createOrder } = useMutation({
+    mutationFn: (userId: string) =>
+      orderServices.createOne({
+        userId
+      })
+  });
+
+  const { mutateAsync: createOrderItems } = useMutation({
+    mutationFn: (orderItemDetails: OrderItemInsert) =>
+      orderItemServices.createOne(orderItemDetails)
   });
 
   async function handleCartItemDelete(id: string): Promise<void> {
     await deleteCartItem(id);
+  }
+
+  async function handleCreateOrder(
+    event: React.MouseEvent<HTMLButtonElement>
+  ): Promise<void> {
+    event.preventDefault();
+    if (!user || !user.id) throw new Error('User not found');
+    const {
+      data: {
+        order: { id: orderId }
+      }
+    } = await createOrder(user.id);
+    for (const cartItem of allCartItems) {
+      await createOrderItems({
+        price: String(cartItem.product.price),
+        productId: cartItem.product.id,
+        quantity: cartItem.quantity,
+        orderId
+      });
+    }
+    await clearCart();
+  }
+
+  async function clearCart(): Promise<void> {
+    for (const cartItem of allCartItems) {
+      await deleteCartItem(cartItem.id);
+    }
   }
 
   return (
@@ -86,13 +127,10 @@ const Cart: React.FC = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {allProducts.map((cartItem) => {
+                  {allCartItems.map((cartItem) => {
                     const { product, quantity } = cartItem;
                     return (
-                      <TableRow
-                        className='cursor-pointer'
-                        onClick={() => navigate(`/products/${product.id}`)}
-                      >
+                      <TableRow>
                         <TableCell className='hidden sm:table-cell'>
                           <img
                             alt='Product image'
@@ -102,7 +140,10 @@ const Cart: React.FC = () => {
                             width='64'
                           />
                         </TableCell>
-                        <TableCell className='font-medium'>
+                        <TableCell
+                          className='font-medium cursor-pointer'
+                          onClick={() => navigate(`/products/${product.id}`)}
+                        >
                           {product.name}
                         </TableCell>
                         <TableCell>{product.price}</TableCell>
@@ -124,9 +165,10 @@ const Cart: React.FC = () => {
                             <DropdownMenuContent align='end'>
                               <DropdownMenuLabel>Actions</DropdownMenuLabel>
                               <DropdownMenuItem
-                                onClick={() =>
-                                  handleCartItemDelete(cartItem.id)
-                                }
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  handleCartItemDelete(cartItem.id);
+                                }}
                               >
                                 Delete
                               </DropdownMenuItem>
@@ -140,6 +182,9 @@ const Cart: React.FC = () => {
               </Table>
             </CardContent>
           </Card>
+          <Button className='float-right mt-4' onClick={handleCreateOrder}>
+            Place Order
+          </Button>
         </TabsContent>
       </Skeleton>
     </Tabs>
