@@ -2,15 +2,15 @@ import { Link } from 'react-router-dom';
 import { ChangeEvent, useState, FormEvent } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
-  Button,
   Card,
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
-  Input,
-  Label
-} from '@/components/ui';
+  CardTitle
+} from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import services from '@/services/auth.route';
 import { LoginUser } from '@e_commerce_package/models/types';
 

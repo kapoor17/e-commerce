@@ -2,15 +2,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
-  Button,
   Card,
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
-  Input,
-  Label
-} from '@/components/ui';
+  CardTitle
+} from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import services from '@/services/auth.route';
 import { RegisterUser } from '@e_commerce_package/models/types';
 import { useToast } from '@/hooks/use-toast';
