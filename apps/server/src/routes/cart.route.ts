@@ -13,7 +13,7 @@ const cartRouter = Router();
 
 cartRouter.post('/create', createOne);
 
-cartRouter.get('/read', isAdmin, readAll);
+cartRouter.get('/read/all', isAdmin, readAll);
 
 cartRouter.get('/read', readOne);
 
