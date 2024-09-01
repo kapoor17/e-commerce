@@ -6,9 +6,11 @@ import {
   RouterProvider
 } from 'react-router-dom';
 import { SignupForm, SigninForm } from './views/auth';
-import { PublicRoutes } from './components/utility/routes';
+import { PrivateRoutes, PublicRoutes } from './components/utility/routes';
 
 import { DashboardLayout } from './components/composite/DashboardLayout';
+import Catalog from './views/products/Catalog';
+import Product from './views/products/Product';
 
 const App = () => {
   const router = createBrowserRouter(
@@ -19,8 +21,11 @@ const App = () => {
           <Route path='sign-up' element={<SignupForm />} />
           <Route path='sign-in' element={<SigninForm />} />
         </Route>
-        <Route element={<PublicRoutes />}>
-          <Route path='dashboard' element={<DashboardLayout />}></Route>
+        <Route element={<PrivateRoutes />}>
+          <Route path='dashboard' element={<DashboardLayout />}>
+            <Route path='products' element={<Catalog />} />
+            <Route path='products/:productId' element={<Product />} />
+          </Route>
         </Route>
       </Route>
     ])
