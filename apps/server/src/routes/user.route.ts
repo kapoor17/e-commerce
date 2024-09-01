@@ -6,13 +6,14 @@ import {
   updateOne,
   createOne
 } from '../controller/user.controller';
-import { validateSchema } from '../middlewares';
+import { isAdmin, validateSchema } from '../middlewares';
 import { UserInsertSchema } from '@e_commerce_package/models/types';
 
 const userRouter = Router();
 
 userRouter.post(
   '/create',
+  isAdmin,
   validateSchema({
     body: UserInsertSchema.pick({
       first_name: true,
@@ -24,20 +25,12 @@ userRouter.post(
   createOne
 );
 
-userRouter.get('/read', readAll);
+userRouter.get('/read', isAdmin, readAll);
 
-userRouter.get(
-  '/read/:id',
-  validateSchema({
-    params: UserInsertSchema.pick({
-      id: true
-    })
-  }),
-  readOne
-);
+userRouter.get('/read', readOne);
 
 userRouter.patch(
-  '/update/:id',
+  '/update',
   validateSchema({
     body: UserInsertSchema.extend({
       first_name: UserInsertSchema.shape.first_name.optional(),
@@ -49,9 +42,6 @@ userRouter.patch(
       last_name: true,
       email: true,
       password: true
-    }),
-    params: UserInsertSchema.pick({
-      id: true
     })
   }),
   updateOne
@@ -59,6 +49,7 @@ userRouter.patch(
 
 userRouter.delete(
   '/delete/:id',
+  isAdmin,
   validateSchema({
     params: UserInsertSchema.pick({
       id: true

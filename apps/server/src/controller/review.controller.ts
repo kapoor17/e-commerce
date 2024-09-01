@@ -1,6 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
 import ReviewService from '../services/review.service';
-import { ReviewSelect, ReviewInsert } from '@e_commerce_package/models/types';
+import {
+  ReviewSelect,
+  ReviewInsert,
+  ProductSelect
+} from '@e_commerce_package/models/types';
+import { UnauthenticatedError } from '@e_commerce_package/errors';
 
 export const createOne = async (
   req: Request<object, object, ReviewInsert>,
@@ -8,7 +13,11 @@ export const createOne = async (
   next: NextFunction
 ) => {
   try {
-    const review = await ReviewService.createOne(req.body);
+    if (!req.user) throw new UnauthenticatedError('User not found');
+    const review = await ReviewService.createOne({
+      ...req.body,
+      userId: req.user.id
+    });
 
     return res.json({ review });
   } catch (e) {
@@ -17,12 +26,14 @@ export const createOne = async (
 };
 
 export const readAll = async (
-  req: Request,
+  req: Request<{ productId: ProductSelect['id'] }>,
   res: Response<{ reviews: ReviewSelect[] }>,
   next: NextFunction
 ) => {
   try {
-    const reviews = await ReviewService.findMany();
+    const reviews = await ReviewService.findMany({
+      productId: req.params.productId
+    });
 
     return res.json({
       reviews

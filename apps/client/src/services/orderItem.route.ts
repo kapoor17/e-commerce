@@ -11,11 +11,6 @@ const orderItemAxios = createAxiosInstance({
 });
 
 const services = {
-  getAll: async (): AxiosPromise<{
-    orderItems: OrderItemSelect[];
-  }> => {
-    return orderItemAxios.get('/read');
-  },
   getOne: async (
     id: OrderItemSelect['id']
   ): AxiosPromise<{
@@ -29,21 +24,6 @@ const services = {
     orderItem: OrderItemSelect;
   }> => {
     return orderItemAxios.post(`/create/`, data);
-  },
-  updateOne: async (
-    id: OrderItemSelect['id'],
-    data: Partial<OrderItemSelect>
-  ): AxiosPromise<{
-    orderItem: OrderItemSelect;
-  }> => {
-    return orderItemAxios.patch(`/update/${id}`, data);
-  },
-  deleteOne: async (
-    id: OrderItemSelect['id']
-  ): AxiosPromise<{
-    orderItem: OrderItemSelect;
-  }> => {
-    return orderItemAxios.delete(`/delete/${id}`);
   }
 };
 

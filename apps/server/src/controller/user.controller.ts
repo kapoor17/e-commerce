@@ -5,6 +5,7 @@ import {
   UserInsert,
   SafeUserSelect
 } from '@e_commerce_package/models/types';
+import { UnauthenticatedError } from '@e_commerce_package/errors';
 
 export const createOne = async (
   req: Request<object, object, UserInsert>,
@@ -42,8 +43,9 @@ export const readOne = async (
   next: NextFunction
 ) => {
   try {
+    if (!req.user) throw new UnauthenticatedError('User not found');
     const user = await UserService.findOne({
-      id: req.params.id
+      id: req.user.id
     });
 
     const { password, ...userWithoutPassword } = user;
@@ -62,8 +64,9 @@ export const updateOne = async (
   next: NextFunction
 ) => {
   try {
+    if (!req.user) throw new UnauthenticatedError('User not found');
     const { password, ...user } = await UserService.updateOne(
-      req.params.id,
+      req.user.id,
       req.body
     );
 

@@ -6,13 +6,14 @@ import {
   updateOne,
   createOne
 } from '../controller/product.controller';
-import { validateSchema } from '../middlewares';
+import { isAdmin, validateSchema } from '../middlewares';
 import { ProductInsertSchema } from '@e_commerce_package/models/types';
 
 const productRouter = Router();
 
 productRouter.post(
   '/create',
+  isAdmin,
   validateSchema({
     body: ProductInsertSchema.pick({
       name: true,
@@ -61,6 +62,7 @@ productRouter.get(
 
 productRouter.patch(
   '/update/:id',
+  isAdmin,
   validateSchema({
     body: ProductInsertSchema.extend({
       name: ProductInsertSchema.shape.name.optional(),
@@ -82,6 +84,7 @@ productRouter.patch(
 
 productRouter.delete(
   '/delete/:id',
+  isAdmin,
   validateSchema({
     params: ProductInsertSchema.pick({
       id: true

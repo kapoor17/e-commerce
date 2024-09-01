@@ -6,35 +6,20 @@ import {
   updateOne,
   createOne
 } from '../controller/cart.controller';
-import { validateSchema } from '../middlewares';
+import { isAdmin, validateSchema } from '../middlewares';
 import { CartInsertSchema } from '@e_commerce_package/models/types';
 
 const cartRouter = Router();
 
-cartRouter.post(
-  '/create',
-  validateSchema({
-    body: CartInsertSchema.pick({
-      userId: true
-    })
-  }),
-  createOne
-);
+cartRouter.post('/create', createOne);
 
-cartRouter.get('/read', readAll);
+cartRouter.get('/read', isAdmin, readAll);
 
-cartRouter.get(
-  '/read/:id',
-  validateSchema({
-    params: CartInsertSchema.pick({
-      id: true
-    })
-  }),
-  readOne
-);
+cartRouter.get('/read', readOne);
 
 cartRouter.patch(
   '/update/:id',
+  isAdmin,
   validateSchema({
     body: CartInsertSchema.extend({
       userId: CartInsertSchema.shape.userId.optional()
@@ -50,6 +35,7 @@ cartRouter.patch(
 
 cartRouter.delete(
   '/delete/:id',
+  isAdmin,
   validateSchema({
     params: CartInsertSchema.pick({
       id: true

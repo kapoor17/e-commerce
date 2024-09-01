@@ -1,6 +1,10 @@
 import { AxiosPromise } from 'axios';
 import createAxiosInstance from './client';
-import { ReviewInsert, ReviewSelect } from '@e_commerce_package/models/types';
+import {
+  ProductSelect,
+  ReviewInsert,
+  ReviewSelect
+} from '@e_commerce_package/models/types';
 
 const reviewAxios = createAxiosInstance({
   baseURL: '/v1/reviews',
@@ -8,10 +12,12 @@ const reviewAxios = createAxiosInstance({
 });
 
 const services = {
-  getAll: async (): AxiosPromise<{
+  getAll: async (
+    productId: ProductSelect['id']
+  ): AxiosPromise<{
     reviews: ReviewSelect[];
   }> => {
-    return reviewAxios.get('/read');
+    return reviewAxios.get(`/read/${productId}`);
   },
   getOne: async (
     id: ReviewSelect['id']
@@ -25,7 +31,7 @@ const services = {
   ): AxiosPromise<{
     review: ReviewSelect;
   }> => {
-    return reviewAxios.post(`/create/`, data);
+    return reviewAxios.post(`/create`, data);
   },
   updateOne: async (
     id: ReviewSelect['id'],

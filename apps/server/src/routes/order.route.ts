@@ -6,20 +6,12 @@ import {
   updateOne,
   createOne
 } from '../controller/order.controller';
-import { validateSchema } from '../middlewares';
+import { isAdmin, validateSchema } from '../middlewares';
 import { OrderInsertSchema } from '@e_commerce_package/models/types';
 
 const orderRouter = Router();
 
-orderRouter.post(
-  '/create',
-  validateSchema({
-    body: OrderInsertSchema.pick({
-      userId: true
-    })
-  }),
-  createOne
-);
+orderRouter.post('/create', createOne);
 
 orderRouter.get('/read', readAll);
 
@@ -35,12 +27,8 @@ orderRouter.get(
 
 orderRouter.patch(
   '/update/:id',
+  isAdmin,
   validateSchema({
-    body: OrderInsertSchema.extend({
-      userId: OrderInsertSchema.shape.userId.optional()
-    }).pick({
-      userId: true
-    }),
     params: OrderInsertSchema.pick({
       id: true
     })
@@ -50,6 +38,7 @@ orderRouter.patch(
 
 orderRouter.delete(
   '/delete/:id',
+  isAdmin,
   validateSchema({
     params: OrderInsertSchema.pick({
       id: true

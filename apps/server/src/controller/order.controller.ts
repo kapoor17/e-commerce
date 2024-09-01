@@ -5,6 +5,7 @@ import {
   OrderInsert,
   DetailedOrder
 } from '@e_commerce_package/models/types';
+import { UnauthenticatedError } from '@e_commerce_package/errors';
 
 export const createOne = async (
   req: Request<object, object, OrderInsert>,
@@ -12,7 +13,11 @@ export const createOne = async (
   next: NextFunction
 ) => {
   try {
-    const order = await OrderService.createOne(req.body);
+    if (!req.user) throw new UnauthenticatedError('User not found');
+    const order = await OrderService.createOne({
+      ...req.body,
+      userId: req.user.id
+    });
 
     return res.json({ order });
   } catch (e) {
@@ -26,7 +31,10 @@ export const readAll = async (
   next: NextFunction
 ) => {
   try {
-    const orders = await OrderService.findMany();
+    if (!req.user) throw new UnauthenticatedError('User not found');
+    const orders = await OrderService.findMany({
+      userId: req.user.id
+    });
 
     return res.json({
       orders
@@ -42,8 +50,10 @@ export const readOne = async (
   next: NextFunction
 ) => {
   try {
+    if (!req.user) throw new UnauthenticatedError('User not found');
     const order = await OrderService.findOne({
-      id: req.params.id
+      id: req.params.id,
+      userId: req.user.id
     });
 
     return res.json({

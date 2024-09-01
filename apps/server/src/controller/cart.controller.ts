@@ -5,14 +5,18 @@ import {
   CartInsert,
   CartWithCartItems
 } from '@e_commerce_package/models/types';
+import { UnauthenticatedError } from '@e_commerce_package/errors';
 
 export const createOne = async (
-  req: Request<object, object, CartInsert>,
+  req: Request,
   res: Response<{ cart: CartSelect }>,
   next: NextFunction
 ) => {
   try {
-    const cart = await CartService.createOne(req.body);
+    if (!req.user) throw new UnauthenticatedError('User not found');
+    const cart = await CartService.createOne({
+      userId: req.user.id
+    });
 
     return res.json({ cart });
   } catch (e) {
@@ -26,7 +30,10 @@ export const readAll = async (
   next: NextFunction
 ) => {
   try {
-    const carts = await CartService.findMany();
+    if (!req.user) throw new UnauthenticatedError('User not found');
+    const carts = await CartService.findMany({
+      userId: req.user.id
+    });
 
     return res.json({
       carts
@@ -42,8 +49,10 @@ export const readOne = async (
   next: NextFunction
 ) => {
   try {
+    if (!req.user) throw new UnauthenticatedError('User not found');
     const cart = await CartService.findOne({
-      id: req.params.id
+      id: req.user.cart.id,
+      userId: req.user.id
     });
 
     return res.json({

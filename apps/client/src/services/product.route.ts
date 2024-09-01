@@ -30,21 +30,6 @@ const services = {
     product: ProductSelect;
   }> => {
     return productAxios.post(`/create/`, data);
-  },
-  updateOne: async (
-    id: ProductSelect['id'],
-    data: Partial<ProductSelect>
-  ): AxiosPromise<{
-    product: ProductSelect;
-  }> => {
-    return productAxios.patch(`/update/${id}`, data);
-  },
-  deleteOne: async (
-    id: ProductSelect['id']
-  ): AxiosPromise<{
-    product: ProductSelect;
-  }> => {
-    return productAxios.delete(`/delete/${id}`);
   }
 };
 
