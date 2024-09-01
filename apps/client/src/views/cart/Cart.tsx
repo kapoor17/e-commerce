@@ -59,7 +59,10 @@ const Cart: React.FC = () => {
     mutationFn: (userId: string) =>
       orderServices.createOne({
         userId
-      })
+      }),
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['orders', 'getAll'] });
+    }
   });
 
   const { mutateAsync: createOrderItems } = useMutation({

@@ -5,7 +5,7 @@ import {
   TooltipContent,
   TooltipProvider
 } from '../ui/tooltip';
-import { Package2, ShoppingCart, Package } from 'lucide-react';
+import { Package2, ShoppingCart, Package, ListOrdered } from 'lucide-react';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
@@ -58,6 +58,26 @@ const DashboardSidebar: React.FC = () => {
               </NavLink>
             </TooltipTrigger>
             <TooltipContent side='right'>Cart</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <NavLink
+                to='/orders'
+                className={({ isActive }) =>
+                  clsx(
+                    'group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full text-lg font-semibold md:h-8 md:w-8 md:text-base',
+                    isActive && 'bg-accent text-primary-foreground'
+                  )
+                }
+              >
+                <ListOrdered className='h-5 w-5' />
+                <span className='sr-only'>Orders</span>
+              </NavLink>
+            </TooltipTrigger>
+            <TooltipContent side='right'>Orders</TooltipContent>
           </Tooltip>
         </TooltipProvider>
       </nav>
