@@ -66,7 +66,7 @@ const OrderDetails: React.FC<IOrderDetails> = ({
           <ul className='grid gap-3'>
             {orderItems.map((orderItem) => (
               <li className='flex items-center justify-between'>
-                <div className='flex items-center gap-4'>
+                <div className='flex items-center gap-2'>
                   <span className='text-muted-foreground'>
                     {orderItem.product.name} x <span>{orderItem.quantity}</span>
                   </span>
@@ -75,7 +75,7 @@ const OrderDetails: React.FC<IOrderDetails> = ({
                     className='cursor-pointer'
                     onClick={() => navigate(`/reviews/${orderItem.product.id}`)}
                   >
-                    Give Review
+                    Review
                   </Badge>
                 </div>
                 <span>${orderItem.price}</span>
