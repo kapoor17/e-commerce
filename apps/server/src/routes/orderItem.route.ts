@@ -6,7 +6,7 @@ import {
   updateOne,
   createOne
 } from '../controller/orderItem.controller';
-import { validateSchema } from '../middlewares';
+import { isAdmin, validateSchema } from '../middlewares';
 import { OrderItemInsertSchema } from '@e_commerce_package/models/types';
 
 const orderItemRouter = Router();
@@ -24,7 +24,16 @@ orderItemRouter.post(
   createOne
 );
 
-orderItemRouter.get('/read', readAll);
+orderItemRouter.get(
+  '/read/:orderId',
+  isAdmin,
+  validateSchema({
+    params: OrderItemInsertSchema.pick({
+      id: true
+    })
+  }),
+  readAll
+);
 
 orderItemRouter.get(
   '/read/:id',
@@ -38,6 +47,7 @@ orderItemRouter.get(
 
 orderItemRouter.patch(
   '/update/:id',
+  isAdmin,
   validateSchema({
     body: OrderItemInsertSchema.extend({
       price: OrderItemInsertSchema.shape.price.optional(),
@@ -59,6 +69,7 @@ orderItemRouter.patch(
 
 orderItemRouter.delete(
   '/delete/:id',
+  isAdmin,
   validateSchema({
     params: OrderItemInsertSchema.pick({
       id: true

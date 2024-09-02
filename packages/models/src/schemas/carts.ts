@@ -9,6 +9,7 @@ export const CartSchema = pgTable('carts', {
   userId: uuid('userId')
     .references(() => UserSchema.id)
     .unique()
+    .notNull()
 });
 
 export type CartInsert = typeof CartSchema.$inferInsert;

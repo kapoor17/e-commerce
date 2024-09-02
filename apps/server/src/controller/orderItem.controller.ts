@@ -2,8 +2,10 @@ import { NextFunction, Request, Response } from 'express';
 import OrderItemService from '../services/orderItem.service';
 import {
   OrderItemSelect,
-  OrderItemInsert
+  OrderItemInsert,
+  OrderSelect
 } from '@e_commerce_package/models/types';
+import { UnauthenticatedError } from '@e_commerce_package/errors';
 
 export const createOne = async (
   req: Request<object, object, OrderItemInsert>,
@@ -20,12 +22,15 @@ export const createOne = async (
 };
 
 export const readAll = async (
-  req: Request,
+  req: Request<{ orderId: OrderSelect['id'] }>,
   res: Response<{ orderItems: OrderItemSelect[] }>,
   next: NextFunction
 ) => {
   try {
-    const orderItems = await OrderItemService.findMany();
+    const { orderId } = req.params;
+    const orderItems = await OrderItemService.findMany({
+      orderId
+    });
 
     return res.json({
       orderItems

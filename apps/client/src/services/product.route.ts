@@ -12,10 +12,12 @@ const productAxios = createAxiosInstance({
 });
 
 const services = {
-  getAll: async (): AxiosPromise<{
+  getAll: async (data: {
+    name: ProductSelect['name'];
+  }): AxiosPromise<{
     products: ProductSelect[];
   }> => {
-    return productAxios.get('/read');
+    return productAxios.get(data.name ? `/read?name=${data.name}` : '/read');
   },
   getOne: async (
     id: ProductSelect['id']
@@ -29,22 +31,7 @@ const services = {
   ): AxiosPromise<{
     product: ProductSelect;
   }> => {
-    return productAxios.post(`/create/`, data);
-  },
-  updateOne: async (
-    id: ProductSelect['id'],
-    data: Partial<ProductSelect>
-  ): AxiosPromise<{
-    product: ProductSelect;
-  }> => {
-    return productAxios.patch(`/update/${id}`, data);
-  },
-  deleteOne: async (
-    id: ProductSelect['id']
-  ): AxiosPromise<{
-    product: ProductSelect;
-  }> => {
-    return productAxios.delete(`/delete/${id}`);
+    return productAxios.post(`/create`, data);
   }
 };
 

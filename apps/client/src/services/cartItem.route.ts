@@ -2,7 +2,8 @@ import { AxiosPromise } from 'axios';
 import createAxiosInstance from './client';
 import {
   CartItemInsert,
-  CartItemSelect
+  CartItemSelect,
+  CartSelect
 } from '@e_commerce_package/models/types';
 
 const cartItemAxios = createAxiosInstance({
@@ -11,10 +12,12 @@ const cartItemAxios = createAxiosInstance({
 });
 
 const services = {
-  getAll: async (): AxiosPromise<{
+  getAll: async (
+    cartId: CartSelect['id']
+  ): AxiosPromise<{
     cartItems: CartItemSelect[];
   }> => {
-    return cartItemAxios.get('/read');
+    return cartItemAxios.get(`/read/${cartId}`);
   },
   getOne: async (
     id: CartItemSelect['id']
@@ -28,7 +31,7 @@ const services = {
   ): AxiosPromise<{
     cartItem: CartItemSelect;
   }> => {
-    return cartItemAxios.post(`/create/`, data);
+    return cartItemAxios.post(`/create`, data);
   },
   updateOne: async (
     id: CartItemSelect['id'],

@@ -3,60 +3,70 @@
     "name": "Wireless Bluetooth Earbuds",
     "description": "High-quality sound with noise cancellation, perfect for music lovers and professionals on the go.",
     "price": "79.99",
+    "inventory": 10,
     "image": "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
   },
   {
     "name": "Stainless Steel Water Bottle",
     "description": "Eco-friendly, vacuum-insulated water bottle that keeps drinks cold for 24 hours or hot for 12 hours.",
     "price": "24.95",
+    "inventory": 10,
     "image": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
   },
   {
     "name": "Ergonomic Office Chair",
     "description": "Comfortable and supportive chair with adjustable height and lumbar support for long working hours.",
     "price": "199.00",
+    "inventory": 10,
     "image": "https://images.unsplash.com/photo-1589384267710-7a170981ca78?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
   },
   {
     "name": "Smart Home Security Camera",
     "description": "HD wireless camera with night vision and two-way audio for home security and peace of mind.",
     "price": "89.99",
+    "inventory": 10,
     "image": "https://images.unsplash.com/photo-1558000143-a78f8299c40b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
   },
   {
     "name": "Portable Power Bank",
     "description": "10000mAh capacity power bank with fast charging capability for smartphones and tablets.",
     "price": "34.50",
-    "image": "https://images.unsplash.com/photo-1609592786260-ded67df6625c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+    "inventory": 10,
+    "image": "https://images.unsplash.com/photo-1706275399494-fb26bbc5da63?q=80&w=2656&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   },
   {
     "name": "Non-Stick Cooking Pan Set",
     "description": "Set of 3 durable, PFOA-free non-stick pans for easy cooking and cleaning.",
     "price": "59.99",
-    "image": "https://images.unsplash.com/photo-1584990347449-716dc4181522?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+    "inventory": 10,
+    "image": "https://plus.unsplash.com/premium_photo-1661410881226-c42c7f6c6690?q=80&w=2664&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   },
   {
     "name": "Yoga Mat with Carrying Strap",
     "description": "Extra thick, non-slip yoga mat with alignment lines and a convenient carrying strap.",
     "price": "29.95",
+    "inventory": 10,
     "image": "https://images.unsplash.com/photo-1592432678016-e910b452f9a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
   },
   {
     "name": "LED Desk Lamp with Wireless Charger",
     "description": "Modern desk lamp with adjustable brightness, color temperature, and built-in wireless phone charger.",
     "price": "45.00",
-    "image": "https://images.unsplash.com/photo-1534281368535-51140ff4e9b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+    "inventory": 10,
+    "image": "https://plus.unsplash.com/premium_photo-1705169612225-c7f9e87430f4?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   },
   {
     "name": "Reusable Produce Bags (Set of 5)",
     "description": "Washable mesh bags for grocery shopping, perfect for fruits and vegetables.",
     "price": "12.99",
+    "inventory": 10,
     "image": "https://images.unsplash.com/photo-1591824438708-ce405f36ba3d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
   },
   {
     "name": "Bluetooth Smart Scale",
     "description": "Digital bathroom scale that measures weight, body fat percentage, and other metrics, syncing data to your smartphone.",
     "price": "49.99",
+    "inventory": 10,
     "image": "https://images.unsplash.com/photo-1576678927484-cc907957088c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
   }
 ]

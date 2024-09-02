@@ -4,12 +4,16 @@ import {
   ReadError,
   UpdateError
 } from '@e_commerce_package/errors';
-import { ExtractTablesWithRelations, TableRelationalConfig } from 'drizzle-orm';
+import {
+  ExtractTablesWithRelations,
+  ilike,
+  TableRelationalConfig
+} from 'drizzle-orm';
 import { and, eq } from 'drizzle-orm';
 import { PgTableWithColumns } from 'drizzle-orm/pg-core';
 import { RelationalQueryBuilder } from 'drizzle-orm/pg-core/query-builders/query';
 import { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
-
+import z from 'zod';
 export class BaseService<
   H extends Record<string, unknown>,
   T extends PgTableWithColumns<{
@@ -66,10 +70,25 @@ export class BaseService<
         keyof Partial<typeof this.schema.$inferSelect>
       >;
       const values = Object.values(data) as Array<any>;
+
+      const fieldsToAvoid = z.object({
+        id: z.string().uuid()
+      });
+      const conditions = keys.map((key, index) => {
+        const value = values[index];
+        if (
+          fieldsToAvoid.safeParse({ id: value }).success ||
+          typeof value !== 'string' ||
+          key === 'price'
+        ) {
+          return eq(this.schema[key], value);
+        } else {
+          return ilike(this.schema[key], `%${value}%`);
+        }
+      });
+
       const entity = await this.tableName.findMany({
-        where: and(
-          ...keys.map((key, index) => eq(this.schema[key], values[index]))
-        ),
+        where: and(...conditions),
         ...extra
       });
 

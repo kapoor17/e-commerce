@@ -7,8 +7,12 @@ import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 const { name, ...BaseEntitySchemaWithoutName } = BaseEntitySchema;
 export const OrderItemSchema = pgTable('order_items', {
   ...BaseEntitySchemaWithoutName,
-  orderId: uuid('orderId').references(() => OrderSchema.id),
-  productId: uuid('productId').references(() => ProductSchema.id),
+  orderId: uuid('orderId')
+    .references(() => OrderSchema.id)
+    .notNull(),
+  productId: uuid('productId')
+    .references(() => ProductSchema.id)
+    .notNull(),
   quantity: integer('quantity').notNull(),
   price: decimal('price').notNull()
 });

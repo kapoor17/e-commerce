@@ -12,6 +12,7 @@ import Catalog from './views/products/Catalog';
 import Product from './views/products/Product';
 import Cart from './views/cart/Cart';
 import Orders from './views/orders/Orders';
+import CreateReview from './views/reviews/CreateReview';
 
 const App = () => {
   const router = createBrowserRouter(
@@ -28,6 +29,7 @@ const App = () => {
             <Route path='products/:productId' element={<Product />} />
             <Route path='cart' element={<Cart />} />
             <Route path='orders' element={<Orders />} />
+            <Route path='reviews/:productId' element={<CreateReview />} />
           </Route>
         </Route>
       </Route>

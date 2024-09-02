@@ -6,13 +6,15 @@ import {
   updateOne,
   createOne
 } from '../controller/product.controller';
-import { validateSchema } from '../middlewares';
+import { isAdmin, validateSchema } from '../middlewares';
 import { ProductInsertSchema } from '@e_commerce_package/models/types';
+import z from 'zod';
 
 const productRouter = Router();
 
 productRouter.post(
   '/create',
+  isAdmin,
   validateSchema({
     body: ProductInsertSchema.pick({
       name: true,
@@ -30,7 +32,7 @@ productRouter.get(
     query: ProductInsertSchema.extend({
       name: ProductInsertSchema.shape.name.optional(),
       price: ProductInsertSchema.shape.price.optional(),
-      inventory: ProductInsertSchema.shape.inventory.optional()
+      inventory: z.coerce.number().optional()
     }).pick({
       name: true,
       price: true,
@@ -45,15 +47,6 @@ productRouter.get(
   validateSchema({
     params: ProductInsertSchema.pick({
       id: true
-    }),
-    query: ProductInsertSchema.extend({
-      name: ProductInsertSchema.shape.name.optional(),
-      price: ProductInsertSchema.shape.price.optional(),
-      inventory: ProductInsertSchema.shape.inventory.optional()
-    }).pick({
-      name: true,
-      price: true,
-      inventory: true
     })
   }),
   readOne
@@ -61,6 +54,7 @@ productRouter.get(
 
 productRouter.patch(
   '/update/:id',
+  isAdmin,
   validateSchema({
     body: ProductInsertSchema.extend({
       name: ProductInsertSchema.shape.name.optional(),
@@ -82,6 +76,7 @@ productRouter.patch(
 
 productRouter.delete(
   '/delete/:id',
+  isAdmin,
   validateSchema({
     params: ProductInsertSchema.pick({
       id: true

@@ -6,8 +6,11 @@ import {
   updateOne,
   createOne
 } from '../controller/review.controller';
-import { validateSchema } from '../middlewares';
-import { ReviewInsertSchema } from '@e_commerce_package/models/types';
+import { isAdmin, validateSchema } from '../middlewares';
+import {
+  ProductInsertSchema,
+  ReviewInsertSchema
+} from '@e_commerce_package/models/types';
 
 const reviewRouter = Router();
 
@@ -15,7 +18,6 @@ reviewRouter.post(
   '/create',
   validateSchema({
     body: ReviewInsertSchema.pick({
-      userId: true,
       productId: true,
       rating: true,
       comment: true
@@ -24,7 +26,15 @@ reviewRouter.post(
   createOne
 );
 
-reviewRouter.get('/read', readAll);
+reviewRouter.get(
+  '/read/:productId',
+  validateSchema({
+    params: ProductInsertSchema.pick({
+      id: true
+    })
+  }),
+  readAll
+);
 
 reviewRouter.get(
   '/read/:id',
@@ -38,14 +48,13 @@ reviewRouter.get(
 
 reviewRouter.patch(
   '/update/:id',
+  isAdmin,
   validateSchema({
     body: ReviewInsertSchema.extend({
-      userId: ReviewInsertSchema.shape.userId.optional(),
       productId: ReviewInsertSchema.shape.productId.optional(),
       rating: ReviewInsertSchema.shape.rating.optional(),
       comment: ReviewInsertSchema.shape.comment.optional()
     }).pick({
-      userId: true,
       productId: true,
       rating: true,
       comment: true
@@ -59,6 +68,7 @@ reviewRouter.patch(
 
 reviewRouter.delete(
   '/delete/:id',
+  isAdmin,
   validateSchema({
     params: ReviewInsertSchema.pick({
       id: true

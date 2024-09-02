@@ -7,8 +7,12 @@ import { BaseEntitySchema } from './base';
 const { name, ...BaseEntitySchemaWithoutName } = BaseEntitySchema;
 export const ReviewSchema = pgTable('reviews', {
   ...BaseEntitySchemaWithoutName,
-  userId: uuid('userId').references(() => UserSchema.id),
-  productId: uuid('productId').references(() => ProductSchema.id),
+  userId: uuid('userId')
+    .references(() => UserSchema.id)
+    .notNull(),
+  productId: uuid('productId')
+    .references(() => ProductSchema.id)
+    .notNull(),
   rating: integer('rating').notNull(),
   comment: text('comment')
 });

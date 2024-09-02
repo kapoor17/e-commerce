@@ -13,6 +13,8 @@ import { Button } from '@/components/ui/button';
 import { DetailedOrder } from '@e_commerce_package/models/types';
 import moment from 'moment';
 import { useMemo } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { useNavigate } from 'react-router-dom';
 
 interface IOrderDetails {
   order: DetailedOrder;
@@ -21,6 +23,7 @@ interface IOrderDetails {
 const OrderDetails: React.FC<IOrderDetails> = ({
   order: { id, createdAt, orderItems }
 }) => {
+  const navigate = useNavigate();
   const totalOrderValue = useMemo(
     () =>
       orderItems.reduce(
@@ -63,9 +66,18 @@ const OrderDetails: React.FC<IOrderDetails> = ({
           <ul className='grid gap-3'>
             {orderItems.map((orderItem) => (
               <li className='flex items-center justify-between'>
-                <span className='text-muted-foreground'>
-                  {orderItem.product.name} x <span>{orderItem.quantity}</span>
-                </span>
+                <div className='flex items-center gap-2'>
+                  <span className='text-muted-foreground'>
+                    {orderItem.product.name} x <span>{orderItem.quantity}</span>
+                  </span>
+                  <Badge
+                    variant='default'
+                    className='cursor-pointer'
+                    onClick={() => navigate(`/reviews/${orderItem.product.id}`)}
+                  >
+                    Review
+                  </Badge>
+                </div>
                 <span>${orderItem.price}</span>
               </li>
             ))}

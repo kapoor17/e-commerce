@@ -15,7 +15,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { useState } from 'react';
 import { useAuth } from '@/providers/AuthProvider';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import Review from '../reviews/Review';
+import ReadReview from '../reviews/ReadReview';
 import { StarFilledIcon, StarIcon } from '@radix-ui/react-icons';
 import { If, Then, Else, When } from '@/components/utility/conditionals';
 
@@ -140,7 +140,7 @@ export default function Product() {
           </CardHeader>
           <CardContent className='grid gap-8'>
             {product.reviews.map((review) => (
-              <Review
+              <ReadReview
                 key={review.id}
                 user={review.user}
                 rating={review.rating}

@@ -30,19 +30,17 @@ import cartItemServices from '@/services/cartItem.route';
 import orderServices from '@/services/order.route';
 import orderItemServices from '@/services/orderItem.route';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useAuth } from '@/providers/AuthProvider';
 import { useNavigate } from 'react-router';
 import { OrderItemInsert } from '@e_commerce_package/models/types';
 
 const Cart: React.FC = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
   const {
     data: allCartItems = [],
     isFetching,
     isError
   } = useQuery({
-    queryFn: () => cartServices.getOne(user?.cart.id ?? ''),
+    queryFn: () => cartServices.getOne(),
     select: (data) => data.data.cart.cartItems,
     queryKey: ['cart', 'getAll']
   });
@@ -56,12 +54,10 @@ const Cart: React.FC = () => {
   });
 
   const { mutateAsync: createOrder } = useMutation({
-    mutationFn: (userId: string) =>
-      orderServices.createOne({
-        userId
-      }),
+    mutationFn: () => orderServices.createOne(),
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['orders', 'getAll'] });
+      queryClient.invalidateQueries({ queryKey: ['products', 'getAll'] });
     }
   });
 
@@ -78,12 +74,11 @@ const Cart: React.FC = () => {
     event: React.MouseEvent<HTMLButtonElement>
   ): Promise<void> {
     event.preventDefault();
-    if (!user || !user.id) throw new Error('User not found');
     const {
       data: {
         order: { id: orderId }
       }
-    } = await createOrder(user.id);
+    } = await createOrder();
     for (const cartItem of allCartItems) {
       await createOrderItems({
         price: String(cartItem.product.price),
