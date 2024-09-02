@@ -4,7 +4,11 @@ import {
   ReadError,
   UpdateError
 } from '@e_commerce_package/errors';
-import { ExtractTablesWithRelations, TableRelationalConfig } from 'drizzle-orm';
+import {
+  ExtractTablesWithRelations,
+  ilike,
+  TableRelationalConfig
+} from 'drizzle-orm';
 import { and, eq } from 'drizzle-orm';
 import { PgTableWithColumns } from 'drizzle-orm/pg-core';
 import { RelationalQueryBuilder } from 'drizzle-orm/pg-core/query-builders/query';
@@ -66,10 +70,18 @@ export class BaseService<
         keyof Partial<typeof this.schema.$inferSelect>
       >;
       const values = Object.values(data) as Array<any>;
+
+      const conditions = keys.map((key, index) => {
+        const value = values[index];
+        if (typeof value === 'string' && !(key === 'price' || key === 'id')) {
+          return ilike(this.schema[key], `%${value}%`);
+        } else {
+          return eq(this.schema[key], value);
+        }
+      });
+
       const entity = await this.tableName.findMany({
-        where: and(
-          ...keys.map((key, index) => eq(this.schema[key], values[index]))
-        ),
+        where: and(...conditions),
         ...extra
       });
 

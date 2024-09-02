@@ -45,7 +45,6 @@ export const readOne = async (
 ) => {
   try {
     const product = await ProductService.findOne({
-      ...req.query,
       id: req.params.id
     });
 

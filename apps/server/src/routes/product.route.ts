@@ -8,6 +8,7 @@ import {
 } from '../controller/product.controller';
 import { isAdmin, validateSchema } from '../middlewares';
 import { ProductInsertSchema } from '@e_commerce_package/models/types';
+import z from 'zod';
 
 const productRouter = Router();
 
@@ -31,7 +32,7 @@ productRouter.get(
     query: ProductInsertSchema.extend({
       name: ProductInsertSchema.shape.name.optional(),
       price: ProductInsertSchema.shape.price.optional(),
-      inventory: ProductInsertSchema.shape.inventory.optional()
+      inventory: z.coerce.number().optional()
     }).pick({
       name: true,
       price: true,
@@ -46,15 +47,6 @@ productRouter.get(
   validateSchema({
     params: ProductInsertSchema.pick({
       id: true
-    }),
-    query: ProductInsertSchema.extend({
-      name: ProductInsertSchema.shape.name.optional(),
-      price: ProductInsertSchema.shape.price.optional(),
-      inventory: ProductInsertSchema.shape.inventory.optional()
-    }).pick({
-      name: true,
-      price: true,
-      inventory: true
     })
   }),
   readOne
