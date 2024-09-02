@@ -1,6 +1,6 @@
 import { PanelLeft, Home, ShoppingCart, Package, Search } from 'lucide-react';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Sheet, SheetTrigger, SheetContent } from '../ui/sheet';
@@ -13,8 +13,20 @@ import {
   DropdownMenuItem
 } from '../ui/dropdown-menu';
 import { AvatarIcon } from '@radix-ui/react-icons';
+import services from '@/services/auth.route';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const DashboardHeader: React.FC = () => {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const { mutateAsync: signOutMutation } = useMutation({
+    mutationFn: () => services.signOut(),
+    onSettled() {
+      queryClient.invalidateQueries({ queryKey: ['auth', 'status'] });
+      navigate('/sign-in');
+    }
+  });
+
   return (
     <header className='sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6'>
       <Sheet>
@@ -74,7 +86,9 @@ const DashboardHeader: React.FC = () => {
           <DropdownMenuItem>Settings</DropdownMenuItem>
           <DropdownMenuItem>Support</DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Logout</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => signOutMutation()}>
+            Logout
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </header>
