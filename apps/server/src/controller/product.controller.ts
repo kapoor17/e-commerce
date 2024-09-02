@@ -5,6 +5,7 @@ import {
   ProductInsert,
   ProductWithReview
 } from '@e_commerce_package/models/types';
+import { ReadError } from '@e_commerce_package/errors';
 
 export const createOne = async (
   req: Request<object, object, ProductInsert>,
@@ -28,6 +29,9 @@ export const readAll = async (
   try {
     const products = await ProductService.findMany({
       ...req.query
+    }).catch((e) => {
+      if (e instanceof ReadError) return [];
+      throw e;
     });
 
     return res.json({

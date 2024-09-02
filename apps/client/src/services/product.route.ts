@@ -12,10 +12,12 @@ const productAxios = createAxiosInstance({
 });
 
 const services = {
-  getAll: async (): AxiosPromise<{
+  getAll: async (data: {
+    name: ProductSelect['name'];
+  }): AxiosPromise<{
     products: ProductSelect[];
   }> => {
-    return productAxios.get('/read');
+    return productAxios.get(data.name ? `/read?name=${data.name}` : '/read');
   },
   getOne: async (
     id: ProductSelect['id']

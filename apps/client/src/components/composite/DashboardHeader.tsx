@@ -1,8 +1,7 @@
-import { PanelLeft, Home, ShoppingCart, Package, Search } from 'lucide-react';
+import { PanelLeft, Home, ShoppingCart, Package } from 'lucide-react';
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '../ui/button';
-import { Input } from '../ui/input';
 import { Sheet, SheetTrigger, SheetContent } from '../ui/sheet';
 import {
   DropdownMenu,
@@ -62,20 +61,12 @@ const DashboardHeader: React.FC = () => {
           </nav>
         </SheetContent>
       </Sheet>
-      <div className='relative ml-auto flex-1 md:grow-0'>
-        <Search className='absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground' />
-        <Input
-          type='search'
-          placeholder='Search...'
-          className='w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[320px]'
-        />
-      </div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
             variant='outline'
             size='icon'
-            className='overflow-hidden rounded-full'
+            className='overflow-hidden rounded-full ml-auto'
           >
             <AvatarIcon width={30} height={30} />
           </Button>
