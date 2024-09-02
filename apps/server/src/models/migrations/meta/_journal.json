@@ -5,43 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1725111563326,
-      "tag": "0000_military_harry_osborn",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1725120778864,
-      "tag": "0001_certain_the_spike",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1725193503371,
-      "tag": "0002_careful_mastermind",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1725209680473,
-      "tag": "0003_mysterious_may_parker",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "7",
-      "when": 1725220580880,
-      "tag": "0004_soft_swordsman",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "7",
-      "when": 1725223473583,
-      "tag": "0005_absurd_loa",
+      "when": 1725269512298,
+      "tag": "0000_conscious_wild_child",
       "breakpoints": true
     }
   ]

@@ -81,7 +81,7 @@ const Cart: React.FC = () => {
     } = await createOrder();
     for (const cartItem of allCartItems) {
       await createOrderItems({
-        price: cartItem.product.price,
+        price: String(cartItem.product.price),
         productId: cartItem.product.id,
         quantity: cartItem.quantity,
         orderId
